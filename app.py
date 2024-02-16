@@ -52,5 +52,13 @@ def add_drink():
     return jsonify({"id": drink.id})
 
 
+@app.route('/drinks/<id>', methods=['DELETE'])
+def delete_drink(id):
+    drink = Drink.query.get_or_404(id)
+    db.session.delete(drink)
+    db.session.commit()
+    return jsonify({"id": drink.id})
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=8000)
