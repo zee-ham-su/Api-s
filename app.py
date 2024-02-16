@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ basic flask app
 """
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from add_data import add_data_to_database
 
@@ -38,6 +38,13 @@ def get_drinks():
     for drink in drinks:
         drinks_list.append({'name': drink.name, 'description': drink.description})
     return {"drinks": drinks_list}
+
+@app.route('/drinks/<id>')
+def get_drink(id):
+    drink = Drink.query.get_or_404(id)
+    return jsonify({"name": drink.name, "description": drink.description})
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=8000)
