@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ basic flask app
 """
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from add_data import add_data_to_database
 
@@ -44,6 +44,12 @@ def get_drink(id):
     drink = Drink.query.get_or_404(id)
     return jsonify({"name": drink.name, "description": drink.description})
 
+@app.route('/drinks', methods=['POST'])
+def add_drink():
+    drink = Drink(name=request.json['name'], description=request.json['description'])
+    db.session.add(drink)
+    db.session.commit()
+    return jsonify({"id": drink.id})
 
 
 if __name__ == '__main__':
