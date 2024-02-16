@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """ basic flask app
 """
-# app.py
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from add_data import add_data_to_database
