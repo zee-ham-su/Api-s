@@ -33,8 +33,11 @@ def index():
 
 @app.route('/drinks')
 def get_drinks():
-    return {'drinks': ['tea', 'coffee', 'water', 'juice']}
-
+    drinks = Drink.query.all()
+    drinks_list = []
+    for drink in drinks:
+        drinks_list.append({'name': drink.name, 'description': drink.description})
+    return {"drinks": drinks_list}
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=8000)

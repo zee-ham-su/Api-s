@@ -2,17 +2,21 @@
 """ data insertion script
 """
 
+
 def add_data_to_database(db, Drink):
     # Create instances of Drink
-    drink1 = Drink(
-        name='Tea', description='A hot beverage made by steeping tea leaves in water.')
-    drink2 = Drink(
-        name='Coffee', description='A brewed drink prepared from roasted coffee beans.')
+    drinks_data = [
+        {'name': 'Tea', 'description': 'A hot beverage made by steeping tea leaves in water.'},
+        {'name': 'Coffee', 'description': 'A brewed drink prepared from roasted coffee beans.'}
+    ]
 
     try:
-        # Add objects to the session
-        db.session.add(drink1)
-        db.session.add(drink2)
+        for data in drinks_data:
+            existing_drink = Drink.query.filter_by(name=data['name']).first()
+            if not existing_drink:
+                new_drink = Drink(
+                    name=data['name'], description=data['description'])
+                db.session.add(new_drink)
 
         # Commit the session to persist the changes to the database
         db.session.commit()
