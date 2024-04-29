@@ -9,7 +9,6 @@ class ModelName(str, Enum):
     resnet = 'resnet'
     lenet = 'lenet'
 
-fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
 
 @app.get("/", description="This is the root path")
 async def get_root():
@@ -23,17 +22,17 @@ async def post_root():
 async def put_root():
     return {"message": 'hello from the put method'}
 
-@app.get("/items")
-async def read_items(skip: int = 0, limit: int = 10):
-    return fake_items_db[skip : skip + limit]
+@app.get("/users")
+async def read_items():
+    return {"message": "list items from the read method"}
 
-@app.get("/items/{item_id}")
-async def get_item(item_id: bool):
-    return {"item_id": item_id}
+@app.get("/users/{user_id}")
+async def get_user(user_id: int):
+    return {"user_id": user_id}
 
 @app.get('/users/me')
-async def read_users_me():
-    return {'user_id': 'the current user'}
+async def get_current_user():
+    return {'user_id': 'this is the current user'}
 
 
 @app.get("/models/{model_name}")
