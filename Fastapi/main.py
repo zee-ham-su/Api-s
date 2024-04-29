@@ -2,10 +2,16 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-fake_items_db = [{"item_name": "Foo"}, {
-    "item_name": "Bar"}, {"item_name": "Baz"}]
 
 
-@app.get("/items/")
-async def read_item(skip: int = 0, limit: int = 10):
-    return fake_items_db[skip: skip + limit]
+@app.get("/", description="This is the root path")
+async def get_root():
+    return {"message": "Hello World"}
+
+@app.post('/')
+async def post_root():
+    return {"message": 'hello from the post method'}
+
+@app.put('/')
+async def put_root():
+    return {"message": 'hello from the put method'}
