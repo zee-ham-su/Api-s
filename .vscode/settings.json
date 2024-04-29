@@ -3,6 +3,7 @@
         "fastapi",
         "jsonify",
         "lenet",
+        "pydantic",
         "sqlalchemy"
     ]
 }
