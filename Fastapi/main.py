@@ -15,3 +15,11 @@ async def post_root():
 @app.put('/')
 async def put_root():
     return {"message": 'hello from the put method'}
+
+@app.get("/items")
+async def get_items():
+    return {"message": 'hello from the get items method'}
+
+@app.get("/items/{item_id}")
+async def get_item(item_id: int):
+    return {"item_id": item_id}
