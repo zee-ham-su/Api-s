@@ -4,10 +4,10 @@ from enum import Enum
 app = FastAPI()
 
 
-class ModelName(str, Enum):
-    alexnet = 'alexnet'
-    resnet = 'resnet'
-    lenet = 'lenet'
+class FoodEnum(str, Enum):
+    fruit = 'fruit'
+    vegetable ='vegetable'
+    dairy = 'dairy'
 
 
 @app.get("/", description="This is the root path")
@@ -26,21 +26,22 @@ async def put_root():
 async def read_items():
     return {"message": "list items from the read method"}
 
-@app.get("/users/{user_id}")
-async def get_user(user_id: int):
-    return {"user_id": user_id}
 
 @app.get('/users/me')
 async def get_current_user():
     return {'user_id': 'this is the current user'}
 
+@app.get("/users/{user_id}")
+async def get_user(user_id: str):
+    return {"user_id": user_id}
 
-@app.get("/models/{model_name}")
-async def get_model(model_name: ModelName):
-    if model_name is ModelName.alexnet:
-        return {"model_name": model_name, "message": "Deep Learning FTW!"}
 
-    if model_name.value == "lenet":
-        return {"model_name": model_name, "message": "LeCNN all the images"}
 
-    return {"model_name": model_name, "message": "Have some residuals"}
+@app.get('/foods/{food_name}')
+async def get_food(food_name: FoodEnum):
+    if food_name == FoodEnum.fruit:
+        return {"food_name": food_name, "message": "This is a fruit"}
+    if food_name == FoodEnum.vegetable:
+        return {"food_name": food_name, "message": "This is a vegetable"}
+    
+    return {"food_name": food_name, "message": "This is a dairy"}
