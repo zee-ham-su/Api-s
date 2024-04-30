@@ -5,6 +5,7 @@
         "lenet",
         "pydantic",
         "sqlalchemy",
+        "uvicorn",
         "venv"
     ]
 }
