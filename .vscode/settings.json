@@ -4,6 +4,7 @@
         "jsonify",
         "lenet",
         "pydantic",
-        "sqlalchemy"
+        "sqlalchemy",
+        "venv"
     ]
 }
