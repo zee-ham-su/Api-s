@@ -33,7 +33,7 @@ app.get('/products', (req, res) => {
 app.post('/products', (req, res) => {
     console.log(req.body);
     products.push(req.body);
-    res.status(201).send('Adding a product');
+    res.status(201).send({ message: 'product successfully added' });
 });
 
 app.get('/', (req, res) => {
