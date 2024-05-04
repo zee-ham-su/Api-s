@@ -31,8 +31,11 @@ app.get('/products', (req, res) => {
 });
 
 app.post('/products', (req, res) => {
-    console.log(req.body);
-    products.push(req.body);
+    const { name, price, quantity, active } = req.body;
+    if (!name || !price || !quantity || !active) {
+        return res.status(400).send({ message: 'All fields are required' });
+     }
+    products.push({ name, price, quantity, active }); 
     res.status(201).send({ message: 'product successfully added' });
 });
 
