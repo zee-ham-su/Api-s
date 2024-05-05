@@ -60,6 +60,31 @@ app.get('/products/:id', (req, res) => {
 });
 
 
+app.put('/products/:id', (req, res) => {
+    const { id } = req.params;
+    const product = products.find(product => product.id === id);
+    if (!product) {
+        return res.status(404).json({ message: 'product not found' });
+    }
+    const { name, price, quantity, active } = req.body;
+
+    if (name) {
+        product.name = name
+    }
+    
+    if (quantity) {
+        product.quantity
+    }
+
+    if (price) {
+        product.price
+    }
+
+    if (active) {
+        product.active
+    }
+    res.status(200).json({message: 'product updated successfully'})
+});
 app.get('/', (req, res) => {
     res.status(200).send("Hello World");
 });
