@@ -85,6 +85,18 @@ app.put('/products/:id', (req, res) => {
     }
     res.status(200).json({message: 'product updated successfully'})
 }); 
+
+app.delete('/products/:id', (req, res) => {
+    const { id } = req.params;
+    const product = products.find(product => product.id === id);
+    if (!product) {
+        return res.status(404).json({ message: 'product not found' });
+    }
+     const index = products.indexOf(product);
+    products.splice(index, 1);
+    res.status(200).json({ message: 'product deleted successfully' });
+});
+
 app.get('/', (req, res) => {
     res.status(200).send("Hello World");
 });
