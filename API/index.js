@@ -50,6 +50,7 @@ app.post('/products', (req, res) => {
 });
 
 app.get('/products/:id', (req, res) => {
+    console.log(req.params);
     const { id } = req.params;
     const product = products.find(product => product.id === id);
     if (!product) {
