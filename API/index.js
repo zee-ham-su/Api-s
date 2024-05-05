@@ -80,11 +80,11 @@ app.put('/products/:id', (req, res) => {
         product.price = price;
     }
 
-    if (active) {
+    if ("active" in req.body) {
         product.active = active;
     }
     res.status(200).json({message: 'product updated successfully'})
-});
+}); 
 app.get('/', (req, res) => {
     res.status(200).send("Hello World");
 });
