@@ -88,7 +88,9 @@ app.put('/products/:id', (req, res) => {
 
 app.delete('/products/:id', (req, res) => {
     const productIndex = products.findIndex(product => product.id === req.params.id);
-    console.log(productIndex);
+    if (productIndex === -1) {
+        return res.status(404).json({ message: 'product not found' });
+    }
     res.status(200).json({message: 'product deleted successfully'});
 
 });
