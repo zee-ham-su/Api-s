@@ -49,6 +49,16 @@ app.post('/products', (req, res) => {
     res.status(201).json({ message: 'product successfully added', id: id });
 });
 
+app.get('/products/:id', (req, res) => {
+    const { id } = req.params;
+    const product = products.find(product => product.id === id);
+    if (!product) {
+        return res.status(404).json({ message: 'product not found' });
+    }
+    res.status(200).json(product);
+});
+
+
 app.get('/', (req, res) => {
     res.status(200).send("Hello World");
 });
