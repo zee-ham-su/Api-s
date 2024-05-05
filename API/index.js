@@ -69,19 +69,19 @@ app.put('/products/:id', (req, res) => {
     const { name, price, quantity, active } = req.body;
 
     if (name) {
-        product.name = name
+        product.name = name;
     }
     
     if (quantity) {
-        product.quantity
+        product.quantity = quantity;
     }
 
     if (price) {
-        product.price
+        product.price = price;
     }
 
     if (active) {
-        product.active
+        product.active = active;
     }
     res.status(200).json({message: 'product updated successfully'})
 });
