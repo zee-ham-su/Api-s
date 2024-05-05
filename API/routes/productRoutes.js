@@ -1,4 +1,6 @@
 import { Router } from 'express'
+import crypto from "crypto";
+
 
 const router = Router();
 
@@ -93,3 +95,5 @@ router.delete('/products/:id', (req, res) => {
     products.splice(index, 1);
     res.status(200).json({ message: 'product deleted successfully' });
 });
+
+export default router;

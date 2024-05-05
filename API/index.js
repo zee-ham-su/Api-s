@@ -1,14 +1,12 @@
 import  express  from "express";
-import crypto from "crypto";
+import router from "./routes/productRoutes.js";
 
 const app = express();
 
 app.use(express.json());
 
+app.use(router)
 
-app.get('/', (req, res) => {
-    res.status(200).send("Hello World");
-});
 
 
 app.listen(3000, () => {
