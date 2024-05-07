@@ -3,6 +3,7 @@
         "fastapi",
         "jsonify",
         "lenet",
+        "middlename",
         "pydantic",
         "sqlalchemy",
         "uvicorn",

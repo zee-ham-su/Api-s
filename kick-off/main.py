@@ -1,54 +1,26 @@
-from fastapi import FastAPI
-from enum import Enum
+#!/usr/bin/python3
+"""The main module containing the fastapi application"""
+from .engine import Engine
+from .pydantic_model import UserRes
+from .pydantic_model import UserSignUp
+from .schema import User
+from fastapi import FastAPI  # type: ignore
+from fastapi import Depends  # type: ignore
+
 
 app = FastAPI()
 
 
-class FoodEnum(str, Enum):
-    fruit = 'fruit'
-    vegetable ='vegetable'
-    dairy = 'dairy'
+@app.post("/sign-up", response_model=UserRes)
+async def sign_up(body: UserSignUp, engine: Engine = Depends(Engine())):
+    """operation function to create a new user"""
+    # deserialize the json data from pydantic
+    data = body.model_dump()
 
-
-@app.get("/", description="This is the root path")
-async def get_root():
-    return {"message": "Hello World"}
-
-@app.post('/')
-async def post_root():
-    return {"message": 'hello from the post method'}
-
-@app.put('/')
-async def put_root():
-    return {"message": 'hello from the put method'}
-
-@app.get("/users")
-async def read_items():
-    return {"message": "list items from the read method"}
-
-
-@app.get('/users/me')
-async def get_current_user():
-    return {'user_id': 'this is the current user'}
-
-@app.get("/users/{user_id}")
-async def get_user(user_id: str):
-    return {"user_id": user_id}
-
-
-
-@app.get('/foods/{food_name}')
-async def get_food(food_name: FoodEnum):
-    if food_name == FoodEnum.fruit:
-        return {"food_name": food_name, "message": "This is a fruit"}
-    if food_name == FoodEnum.vegetable:
-        return {"food_name": food_name, "message": "This is a vegetable"}
-    
-    return {"food_name": food_name, "message": "This is a dairy"}
-
-fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
-
-@app.get('/items')
-async def list_items(skip: int = 0, limit: int = 10):
-    return fake_items_db[skip: skip + limit]
-
+    # supply the dic data to the engine post method
+    print(data)
+    user = engine.post(User, **data)
+    print(user.__dict__)
+    engine.save()
+    # return success
+    return user
