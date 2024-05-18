@@ -1,6 +1,6 @@
 const express = require('express');
 const Datastore = require('nedb-promises');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 // initialize express
 const app = express();
