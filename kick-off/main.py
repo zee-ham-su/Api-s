@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """The main module containing the fastapi application"""
-from .engine import Engine
-from .pydantic_model import UserRes
-from .pydantic_model import UserSignUp
-from .schema import User
+from engine import Engine
+from pydantic_model import UserRes
+from pydantic_model import UserSignUp
+from schema import User
 from fastapi import FastAPI  # type: ignore
 from fastapi import Depends  # type: ignore
 

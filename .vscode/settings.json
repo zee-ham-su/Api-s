@@ -1,9 +1,11 @@
 {
     "cSpell.words": [
+        "dotenv",
         "fastapi",
         "jsonify",
         "lenet",
         "middlename",
+        "psycopg",
         "pydantic",
         "sqlalchemy",
         "uvicorn",

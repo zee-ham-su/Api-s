@@ -3,12 +3,14 @@
 This module contains the engine class used to initiate transactions with
 postgresql database
 """
-from .schema import Base
+from schema import Base
+from dotenv import load_dotenv
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy_utils import force_auto_coercion
 from sqlalchemy.orm import Session
 
+load_dotenv()
 
 class Engine():
     """Engine class to interact with sql database"""
@@ -18,8 +20,16 @@ class Engine():
     __db_hostname = getenv("DB_HOSTNAME")
     __db_password = getenv("DB_PASSWORD")
 
+    print("DB_NAME:", getenv("DB_NAME"))
+    print("DB_USER:", getenv("DB_USER"))
+    print("DB_PORT:", getenv("DB_PORT"))
+    print("DB_HOSTNAME:", getenv("DB_HOSTNAME"))
+    print("DB_PASSWORD:", getenv("DB_PASSWORD"))
+
     def __init__(self):
         force_auto_coercion()
+        default_db_port = "5432" # default port for postgresql
+        self.__db_port = getenv("DB_PORT", default_db_port)
         self.db_url = (f"postgresql+psycopg2://{self.__db_user}:"
                        f"{self.__db_password}@{self.__db_hostname}:"
                        f"{self.__db_port}/{self.__db_name}")
