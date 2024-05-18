@@ -20,12 +20,16 @@ app.post('/api/auth/register', async (req, res) => {
         if (!name || !email || !password) {
         return res.status(422).json({ error: "Please fill all fields" });
         }
+
+        if (await users.findOne({ email })) {
+            return res.status(409).json({ error: "User already exists" });
+        }
         const hasPassword = await bcrypt.hash(password, 10);
         const newUser = await users.insert({
             name,
             email,
             password: hasPassword });
-            return res.status(201).json(newUser);
+            return res.status(201).json({ message: "User created successfully", id: newUser.id});
     }
     catch (error) {
         return res.status(500).json({ error: error.message });
