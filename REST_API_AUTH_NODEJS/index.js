@@ -10,13 +10,15 @@ app.use(express.json());
 
 const users = Datastore.create('Users.json');
 
+// home page
 app.get('/', (req, res) => {
     res.send('REST API Authorization and Authentication');
 });
 
-app.post('/api/auth/register', async (req, res) => {
+// POST METHOD TO create a new user 
+app.post('/api/auth/register', async (req, res) => {  
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password } = req.body; 
         if (!name || !email || !password) {
         return res.status(422).json({ error: "Please fill all fields" });
         }
